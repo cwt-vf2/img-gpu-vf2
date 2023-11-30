@@ -2,16 +2,18 @@
 
 # IMG_GPU drivers for VisionFive2 RISC-V boards.
 
-pkgname=visionfive2-img-gpu
+pkgname=img-gpu-vf2
+_old_pkgname=visionfive2-img-gpu
 pkgver=1.19.6345021
-pkgrel=4
-_tag=VF2_v3.8.2
+pkgrel=5
+_tag=JH7110_VF2_515_v3.9.3
 pkgdesc="This is the GLES and Vulkan implementation provided by StarFive for the IMG_GPU"
 _3rdpart_repo='https://github.com/starfive-tech/soft_3rdpart'
 url="${_3rdpart_repo}/tree/JH7110_VisionFive2_devel"
 arch=(riscv64)
 license=(custom)
-provides=(opengl-driver vulkan-driver)
+provides=(opengl-driver vulkan-driver ${_old_pkgname})
+conflicts=(${_old_pkgname})
 optdepends=('libglvnd: to use opengl'
 	    'vulkan-icd-loader: to use vulkan'
 	    'ocl-icd: to use opencl')
