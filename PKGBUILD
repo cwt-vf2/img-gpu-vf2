@@ -12,7 +12,7 @@ _3rdpart_repo='https://github.com/starfive-tech/soft_3rdpart'
 url="${_3rdpart_repo}/tree/JH7110_VisionFive2_devel"
 arch=(riscv64)
 license=(custom)
-provides=(opengl-driver vulkan-driver ${_old_pkgname})
+provides=(opengl-driver vulkan-driver ${_old_pkgname}=${pkgver})
 conflicts=(${_old_pkgname})
 optdepends=('libglvnd: to use opengl'
 	    'vulkan-icd-loader: to use vulkan'
