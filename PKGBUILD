@@ -5,7 +5,7 @@
 pkgname=img-gpu-vf2
 _old_pkgname=visionfive2-img-gpu
 pkgver=1.19.6345021
-pkgrel=5
+pkgrel=6
 _tag=JH7110_VF2_515_v3.9.3
 pkgdesc="This is the GLES and Vulkan implementation provided by StarFive for the IMG_GPU"
 _3rdpart_repo='https://github.com/starfive-tech/soft_3rdpart'
@@ -18,9 +18,11 @@ optdepends=('libglvnd: to use opengl'
 	    'vulkan-icd-loader: to use vulkan'
 	    'ocl-icd: to use opencl')
 source=("img-gpu-powervr-bin-${pkgver}-${_tag}.tar.gz::${_3rdpart_repo}/raw/${_tag}/IMG_GPU/out/img-gpu-powervr-bin-${pkgver}.tar.gz"
-	'img-gpu-firmware-mkinitcpio.conf')
+	'img-gpu-firmware-mkinitcpio.conf'
+	'90-img-gpu.rules')
 sha256sums=('9dcaf2084b13e59c4e50a4a288f5de56f8e9ee631627a3e818591675bf61311a'
-            '1bab00f54e5d0e6f79c5abfbd50f20bfb29284ddb45974194bd9b4d69e38d3bd')
+            '1bab00f54e5d0e6f79c5abfbd50f20bfb29284ddb45974194bd9b4d69e38d3bd'
+            '43b9fe54eee0e70b09a8667a8082f2843e54f9d3a9951c927ef0b678911691f4')
 options=(!strip)
 
 package() {
@@ -88,4 +90,7 @@ package() {
     install -Dm644 lib/firmware/rgx.fw.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.fw.36.50.54.182"
     install -Dm644 lib/firmware/rgx.sh.36.50.54.182 "${pkgdir}/usr/lib/firmware/rgx.sh.36.50.54.182"
     install -Dm644 $srcdir/img-gpu-firmware-mkinitcpio.conf "${pkgdir}/etc/mkinitcpio.conf.d/${pkgname}.conf"
+
+    # Udev rules
+    install -Dm644 $srcdir/90-img-gpu.rules "${pkgdir}/etc/udev/rules.d/90-img-gpu.rules"
 }
